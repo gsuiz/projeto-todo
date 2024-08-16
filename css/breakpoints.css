@@ -1,0 +1,59 @@
+
+@media screen and (min-width:760px) {
+    :root{
+        --imgBack: url("../images/bg-desktop-light.jpg");
+        --hoverColor:hsl(234, 12%, 32%);
+        &.dark-mode{
+            --hoverColor:hsl(236, 33%, 92%);
+        }
+    }
+    header{
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:  50px;
+    }
+    .top-items{
+        width: 600px;
+    }
+    #form{
+        margin: 0;
+    }
+    .box-task{
+        box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
+    }
+    .box-task__menu p:last-of-type:hover{
+        color: var(--hoverColor);
+    }
+    main{
+        top: -50px;
+    }
+    .items__content{
+        padding: 3% 22px;
+    }
+    .content__delete{
+        display: none !important;
+    }
+    .items__content:hover .content__delete{
+        display: inline-block !important;
+    }
+
+    .menu__list{
+        display: flex;
+    }
+
+    .menu__list li{
+        cursor: pointer;
+    }
+
+    .menu__list li:not(.list__selected):hover{
+        color: var(--hoverColor);
+    }
+
+    .menuMob__list{
+        display: none;
+    }
+
+}

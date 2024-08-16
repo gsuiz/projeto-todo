@@ -4,9 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/breakpoints.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <script type="module" src="js/script.js"></script>
+    <header>
+
+        <div class="top-items">
+            <h2 class="top-items__title">TODO</h2>
+            <i class="fa-solid fa-moon" id="icon"></i>
+        </div>
+        <form id="form">
+            <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+            <input type="text" placeholder="Create a new todo..." class="input-todo" id="inputText" autocomplete="off">
+        </form>
+
+    </header>   
+    <main>
+
+        <div class="box-task">
+            <div class="box-task__items">
+                <div id="no-task" class="items__content">
+                    <h3 class="content__noTask">There are no tasks here!</h3>
+                </div>
+            </div>            
+            <div class="box-task__menu">
+                <p id="itemsLeft">0 items left</p>
+                <ul class="menu__list">
+                    <li class="list__selected option-task">All</li>
+                    <li class="option-task">Active</li>
+                    <li class="option-task">Completed</li>
+                </ul>
+                <p id="clear">Clear Completed</p>
+            </div>
+        </div>
+        <div class="box-menuMob">
+            <ul class="menuMob__list">
+                <li class="list__selected option-task">All</li>
+                <li class="option-task">Active</li>
+                <li class="option-task">Completed</li>
+            </ul>
+        </div>
+
+        <p>Drag and drop to reorder list</p>
+    </main>
+    <footer></footer>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

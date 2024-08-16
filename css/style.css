@@ -1,6 +1,246 @@
+
+:root{
+    --imgBack: url("../images/bg-mobile-light.jpg");
+    --boxColor: hsl(0, 0%, 98%);
+    --bodyColor:hsl(236, 33%, 92%);
+    --borderColor:hsl(233, 11%, 84%);
+    --fontColor:hsl(235, 19%, 35%);
+    --iconsColor:hsl(236, 15%, 65%);
+
+    &.dark-mode{
+        --boxColor: hsl(235, 24%, 19%);
+        --bodyColor: hsl(235, 21%, 11%);
+        --borderColor:hsl(233, 14%, 35%);
+        --fontColor: hsl(234, 39%, 85%);
+        --iconsColor:hsl(236, 7%, 48%);
+    }
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Josefin Sans";
+    transition: .5s;
 }
 
+body{
+    background-color:var(--bodyColor);
+}
+
+header{ 
+    width: 100%;
+    height: 250px;
+    background: var(--imgBack) no-repeat center;
+    background-size: cover;
+    padding: 70px 5%;
+}
+
+.top-items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.top-items__title{
+    letter-spacing: 15px;
+    font-size: 40px;
+}
+
+#icon{
+    font-size: 28px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+#form{
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+    height: 50px;
+    border-radius: 5px;
+    background-color:var(--boxColor) ;
+    margin-top: 20px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-add{
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px solid var(--borderColor);
+    color:  var(--iconsColor);
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-add:hover{
+    color: var(--fontColor);
+    border-color: var(--fontColor);
+}
+
+.input-todo{
+    min-width: 0;
+    border: none;
+    font-size: 17px;
+    background: transparent;
+    height: 100%;
+    outline: 0;
+    flex-grow: 1;
+    padding-top: 3px;
+    color: var(--fontColor);
+}
+
+main{
+    padding: 0 5%;
+    position: relative;
+    top: -30px;
+}
+
+.box-task,.box-menuMob{
+    margin: auto;
+    max-width: 600px;
+    background-color:var(--boxColor);
+    border-radius: 10px;
+}
+
+.box-menuMob{
+    margin-top: 20px;
+}
+
+.box-task__items{
+    max-height: 370px;
+    overflow-y: scroll;
+}
+
+.items__content{
+    width: 100%;
+    display: flex;
+    align-items: center; 
+    gap: 12px;
+    padding: 5% 22px;
+    border-bottom: 2px solid var(--borderColor);
+    display: flex;
+    justify-content: space-between;
+}
+
+.draggin{
+    opacity: 0.5;
+    position:relative ;
+
+    &::after{
+        content: "Dragging";
+        position: absolute;
+        right: 60px;
+        color: var(--fontColor);
+    }
+}
+
+.content__noTask{
+    margin: auto;
+    color: var(--iconsColor);
+}
+
+.content__taskname{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--fontColor);
+}
+
+#check{
+    position: absolute;
+    bottom: 9999999px;
+}
+
+.taskname__check{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid var(--iconsColor);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: none;
+
+    &.concluded{
+        background-image: linear-gradient(140deg, hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+        border:none;
+
+        & i{
+            display: block;
+        }
+    }
+}
+
+.taskname__check i{
+    display: none;
+}
+
+.content__taskname label{
+    cursor: pointer;
+}
+
+.content__delete{
+    color: var(--iconsColor);
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.content__delete:hover{
+    color: var(--fontColor);
+}
+
+.box-task__menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5%;
+    color: var(--iconsColor);
+}
+
+.box-task__menu p:last-of-type{
+    cursor: pointer;
+}
+
+.menu__list{
+    display: none;
+    list-style: none;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.menuMob__list{
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-weight: bold;
+    font-size: 17px;
+    color: var(--iconsColor);
+    list-style: none;
+    padding: 20px 5%;
+
+    & .option-task{
+        cursor: pointer;
+    }
+}
+
+.list__selected{
+    color: hsl(236, 83%, 67%);
+}
+
+main > p{
+    text-align: center;
+    margin: 40px 0;
+    color: var(--iconsColor);
+}

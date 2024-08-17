@@ -35,6 +35,13 @@ class Tarefas{
         this.boxTask.appendChild(this.semTarefa)
     }
 
+    #reoganizarTarefas(newTaskOrder){
+        const state = document.querySelector(".list__selected")
+        state.innerHTML === "All" ? this.todas = newTaskOrder : null
+        state.innerHTML === "Active" ? this.ativas = newTaskOrder : null
+        state.innerHTML === "Completed" ? this.completas = newTaskOrder : null
+    }
+
     adicionar(nome){       
         this.boxTaskChildren = Array.from(this.boxTask.children)
         if(this.boxTaskChildren.includes(this.semTarefa)){
@@ -107,13 +114,6 @@ class Tarefas{
         } else if(element.innerHTML === "Completed"){
             this.#adicionarTaskEstado(this.completas, "There are no completed tasks!")
         }
-    }
-
-    reoganizarTarefas(newTaskOrder){
-        const state = document.querySelector(".list__selected")
-        state.innerHTML === "All" ? this.todas = newTaskOrder : null
-        state.innerHTML === "Active" ? this.ativas = newTaskOrder : null
-        state.innerHTML === "Completed" ? this.completas = newTaskOrder : null
     }
 }
 

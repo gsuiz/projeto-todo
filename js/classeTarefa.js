@@ -35,11 +35,11 @@ class Tarefas{
         this.boxTask.appendChild(this.semTarefa)
     }
 
-    #reoganizarTarefas(newTaskOrder){
+    reorganizarTarefas(newTaskOrder){
         const state = document.querySelector(".list__selected")
-        state.innerHTML === "All" ? this.todas = newTaskOrder : null
-        state.innerHTML === "Active" ? this.ativas = newTaskOrder : null
-        state.innerHTML === "Completed" ? this.completas = newTaskOrder : null
+        state.innerHTML === "All" ? this.todas = newTaskOrder: null
+        state.innerHTML === "Active" ? this.ativas = newTaskOrder.filter(item => this.ativas.includes(item)) : null
+        state.innerHTML === "Completed" ? this.completas = newTaskOrder.filter(item => this.completas.includes(item)) : null
     }
 
     adicionar(nome){       
@@ -49,7 +49,7 @@ class Tarefas{
         } 
 
         const nomeNormalizado = nome.trim().toLowerCase()
-        if(!this.boxTaskChildren.some(item => item.innerText.trim().toLowerCase() == nomeNormalizado) || this.boxTask.length === 0){
+        if(!this.todas.some(item => item.innerText.trim().toLowerCase() == nomeNormalizado) || this.boxTask.length === 0){
             this.boxTask.innerHTML += `
             <div class="items__content" draggable="true">
                 <div class="content__taskname">
@@ -60,28 +60,26 @@ class Tarefas{
                 <i class="fa-solid fa-xmark content__delete"></i>
             </div>
                     `
-            this.todas = Array.from(this.boxTask.children)
-            this.ativas = Array.from(this.boxTask.children)
-                .filter(item => !(item.children[0].children[1].classList.contains("concluded")))
+
+            if(this.todas === Array.from(this.boxTask.children)){
+                this.todas = Array.from(this.boxTask.children)
+            } else {
+                this.todas.push(this.boxTask.lastElementChild)
+            }
+            this.ativas.push(this.boxTask.lastElementChild)
             quantityTask()
         }
     }
 
     remover(element){
-        this.boxTaskChildren = Array.from(this.boxTask.children)
-        const arrTask = this.boxTaskChildren.filter(item => item !== element)
-        this.boxTask.replaceChildren()
-        arrTask.forEach(item => {
-            this.boxTask.appendChild(item)  
-        })
+        this.ativas = this.ativas.filter(item => item.textContent != element.textContent)
+        this.todas = this.todas.filter(item => item.textContent != element.textContent)
+        this.completas = this.completas.filter(item => item.textContent != element.textContent)
 
-        if(arrTask.length === 0){
+        element.remove()
+        if(this.boxTask.children.length === 0){
             this.#mostrarMensagemSemTarefa()
         }
-
-        this.ativas = this.ativas.filter(item => item != element)
-        this.todas = this.todas.filter(item => item != element)
-        this.completas = this.completas.filter(item => item != element)
 
         quantityTask()
     }
@@ -97,11 +95,15 @@ class Tarefas{
 
     marcarConcluida(element){
         const parent = element.parentNode.parentNode
+        const parentTodas = this.todas.find(item => item.textContent == parent.textContent)
+
         if(element.classList.contains("concluded")){
-            this.ativas = this.ativas.filter(item => item != parent)
+            parentTodas.children[0].children[1].classList.add("concluded")
+            this.ativas = this.ativas.filter(item => item.textContent != parent.textContent)
             this.completas.push(parent)
         } else {
-            this.completas = this.completas.filter(item => item != parent)
+            parentTodas.children[0].children[1].classList.remove("concluded")
+            this.completas = this.completas.filter(item => item.textContent != parent.textContent)
             this.ativas.push(parent)
         }
     }

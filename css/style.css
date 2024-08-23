@@ -117,8 +117,7 @@ main{
 }
 
 .box-task__items{
-    max-height: 370px;
-    overflow-y: scroll;
+    max-height: 380px;
 }
 
 .items__content{
@@ -126,7 +125,7 @@ main{
     display: flex;
     align-items: center; 
     gap: 12px;
-    padding: 5% 22px;
+    padding: 23px 22px;
     border-bottom: 2px solid var(--borderColor);
     display: flex;
     justify-content: space-between;
@@ -134,7 +133,7 @@ main{
 
 .draggin{
     opacity: 0.5;
-    position:relative ;
+    position:relative;
 
     &::after{
         content: "Dragging";

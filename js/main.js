@@ -103,21 +103,53 @@ const dragNdrop = () => {
                     e.target.insertAdjacentElement("afterend",draggin)
                 }
 
-                tarefas.reoganizarTarefas(Array.from(boxTask.children))
+                tarefas.reorganizarTarefas(Array.from(boxTask.children))
             }
         }
     })
 }
 
 
-const media = matchMedia("(min-width:1366px)")
+const mediaDesktop = matchMedia("(min-width:1366px)")
 
-if(media.matches) dragNdrop()
+if(mediaDesktop.matches) dragNdrop()
 
-media.addEventListener("change", () => {
-    if(media.matches) dragNdrop()
+mediaDesktop.addEventListener("change", () => {
+    if(mediaDesktop.matches) dragNdrop()
 })
 
 // drag and drop
+
+const mediaMobile = window.matchMedia("(max-width:760px)")
+
+mediaMobile.addEventListener("change", () => {
+    const menuTask = document.querySelectorAll(".menu")
+    menuTask.forEach(item => {
+        for(let itemOP of item.children){
+            itemOP.classList.remove("list__selected")
+        }
+    })
+    menuTask.forEach(item => item.firstElementChild.classList.add("list__selected"))
+
+    tarefas.selecionarEstadoTask(menuTask[0].firstElementChild)
+})
+
+// voltando para as tarefas de "all" toda vez que mudar a resolução de mobile para desktop    
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach(item => {
+        if(item.target.scrollHeight > item.target.clientHeight){
+            item.target.style.overflowY = "scroll"
+        } else {
+            item.target.style.overflowY = "hidden"
+        }
+    })
+})
+
+const config = {childList:true}
+
+observer.observe(boxTask,config)
+
+// reagindo a adição e remoção de elementos para colocar overflow
 
 export { quantityTask,optionsTask }
